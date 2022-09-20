@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - EatMore</title>
+    <link rel="icon" href="assets/Images/logo-icon.png">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Boot strap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(function(){
+            var pflag = uflag = pinflag = passflag = rpassflag = eflag= true;
+            $("#phone").change(()=>{
+                var phonenum = $("#phone").val()
+                var flag = true;
+                if(phonenum.length!=10)
+                {
+                    $('#phoneres').text('Please enter valid number').css({'color':'red', 'font-weight':'bold'})
+                    flag=false;
+                    pflag=false;
+                }
+                if(isNaN(phonenum))
+                {
+                    $('#phoneres').text('Please enter valid number').css({'color':'red', 'font-weight':'bold'})
+                    flag=false;
+                    pflag=false;
+                }
+                if(flag)
+                {   
+                    $.ajax({
+                    method: "GET",
+                    url: `/checkDuplicatePhone/${phonenum}`,
+                    success: function(response){
+                        if(response.data.length>0)
+                        {
+                            $('#phoneres').text('User exist on this number').css({'color':'red', 'font-weight':'bold'})
+                            pflag=false;
+                        }else
+                        {
+                            pflag=true;
+                            $('#phoneres').text("")
+                        }
+                    },
+                    error: function(error){
+                        $('#phoneres').text('Something went wrong').css({'color':'red', 'font-weight':'bold'})
+                    }
+                })
+                }
+            })
+        
+            $("#uname").change(()=>{
+                var uname = $("#uname").val()
+                var flag = true;
+
+                if(uname.length<5)
+                {
+                    $('#unameres').text('Username should be minimum 5 letters!').css({'color':'red', 'font-weight':'bold'})
+                    flag=false;
+                    uflag = false;
+                }
+                if(flag)
+                {
+                    $.ajax({
+                    method: "GET",
+                    url: `/checkDuplicateUsername/${uname}`,
+                    success: function(response){
+                        if(response.data.length>0)
+                        {
+                            uflag = false;
+                            $('#unameres').text('User exist on this Username').css({'color':'red', 'font-weight':'bold'})
+                        }else
+                        {
+                            uflag = true;
+                            $('#unameres').text("")
+                        }
+                    },
+                    error: function(error){
+                        $('#unameres').text('Something went wrong').css({'color':'red', 'font-weight':'bold'})
+                    }
+                })
+                }
+            })
+
+            $("#pincode").change(()=>{
+                var pin = $("#pincode").val()
+                var flag = true;
+                
+                if(isNaN(pin))
+                {
+                    $("#pincode").val("").attr('placeholder', 'Enter valid PINCODE');
+                    $("#country").val("")
+                    $("#state").val("")
+                    $("#city").val("") 
+                    flag=false;
+                    pinflag = false;
+                }
+                if(flag)
+                {
+                    pinflag = true;
+                    $.ajax({
+                    method: "GET",
+                    url: `/getAddress/${pin}`,
+                    success: function(response){
+                        if(response.data.length>0)
+                        {
+                            $("#country").val(response.data[0].Country)
+                            $("#state").val(response.data[0].State)
+                            $("#city").val(response.data[0].City)
+                        }else
+                        {
+                            $("#country").val("")
+                            $("#state").val("")
+                            $("#city").val("")                            
+                        }
+                    }
+                })
+
+                }
+            })
+            
+            $("#pass").change(()=>{
+                var pass = $("#pass").val()
+                var rpass = $("#rpass").val()
+                var flag = true;
+                if(pass.length<5)
+                {
+                    $('#res').text('Password should be minimum 5 letters').css({'color':'red', 'font-weight':'bold'})
+                    flag=false;
+                    passflag=false;  
+                }else {
+                    passflag=true;
+                    $('#res').text('')
+                }
+            })
+
+            $("#email").change(()=>{
+                var email = $("#email").val().toLowerCase()
+                
+                if(email.endsWith("@gmail.com") || email.endsWith("@yahoo.in"))
+                {
+                    $.ajax({
+                    method: "GET",
+                    url: `/checkDuplicateEmail/${email}`,
+                    success: function(response){
+                        if(response.data.length>0)
+                        {
+                            $('#emailres').text('User already exist on this email').css({'color':'red', 'font-weight':'bold'})
+                            eflag=false;
+                        }else
+                        {
+                            eflag=true;
+                            $('#emailres').text("")
+                        }
+                    },
+                    error: function(error){
+                        $('#emailres').text('Something went wrong').css({'color':'red', 'font-weight':'bold'})
+                    }
+                })   
+                }else
+                {
+                    eflag=false;
+                    $('#emailres').text('Enter valid email').css({'color':'red', 'font-weight':'bold'})
+                }
+            })
+
+            $("#subbtn").click(()=>{
+                var fname = $("#fname").val()
+                var lname = $("#lname").val()
+                var gen = $("input[type='radio'][name='gen']:checked").val()
+                var email = $("#email").val()
+                var phone = $("#phone").val()
+                var add = $("#address").val()
+                var pin = $("#pincode").val()
+                var city = $("#city").val()
+                var state = $("#state").val()
+                var country = $("#country").val()
+                var uname = $("#uname").val()
+                var pass = $("#pass").val()
+                var rpass = $("#rpass").val()
+                
+                var flag=true;
+
+                if(pass!=rpass)
+                {
+                    $('#res').text('Password not matched! Please enter again').css({'color':'red', 'font-weight':'bold'})
+                    rpassflag=false;
+                }else
+                {
+                    rpassflag=true;
+                    $('#res').text('')
+                }
+
+                if(fname=="" || gen==undefined || phone=="" || add=="" || email=="" || pin=="" || city=="" || state=="" || country=="" || uname=="" || pass=="")
+                {
+                    $('#res').text('Please fill all the required fields').css({'color':'red', 'font-weight':'bold'})
+                    flag=false;
+                }
+                if(pflag && uflag && pinflag && passflag && rpassflag && eflag && flag)
+                {
+                    var formdata = {
+                        "CustomerFName": fname,
+                        "CustomerLName": lname,
+                        "CustomerGen": gen,
+                        "CustomerEmail": email,
+                        "CustomerPhone": phone,
+                        "CustomerCountry": country,
+                        "CustomerState": state,
+                        "CustomerCity": city,
+                        "CustomerAdd": add,
+                        "CustomerPin": pin,
+                        "CustomerUserName": uname,
+                        "CustomerPass": pass
+                    }
+                    console.log(formdata)
+                    $.ajax({
+                        type: "POST",
+                        url: "/enrollCustomer",
+                        data: JSON.stringify(formdata),
+                        contentType: "application/json",
+                        success: function(response){
+                            alert("Account created successfully!")
+                            location.href = "./loginPage.html"
+                        },
+                        error: function(error)
+                        {
+                            $('#res').text('Please enter the fields in given valid format').css({'color':'red', 'font-weight':'bold'})
+                        }
+                    })
+                }
+                // else
+                // {
+                //     console.log(pflag+" "+uflag+" "+passflag+" "+rpassflag+" "+pinflag+" "+flag)
+                // }
+                
+            })
+        })
+    </script>
+
+</head>
+<body id="loginBody">
+    <div id="div1">
+        <div id="div2" class="border rounded-4">
+            <h2 class="text-center">Sign Up form</h2>
+            <table id="signuptable">
+                <tr>
+                    <td><label>Enter your first name: <span id="colorspan">*</span></label></td>
+                    <td><input type="text" class="form-control m-lg-4" id="fname"></td>
+                </tr>
+                <tr>
+                    <td><label>Enter your Last name: </label></td>
+                    <td><input type="text" class="form-control m-lg-4" id="lname"></td>
+                </tr>
+                <tr>
+                    <td><label>Select your Gender: <span id="colorspan">*</span></label></td>
+                    <td class="d-flex"> 
+                        <input type="radio"  name="gen" value="Male" class="form-check m-lg-4">
+                        <label class="mt-lg-4">Male</label>
+                        <input type="radio" name="gen" value="Female" class="form-check m-lg-4">
+                        <label class="mt-lg-4">Female</label>
+                        <input type="radio" name="gen" value="Others" class="form-check m-lg-4">
+                        <label class="mt-lg-4">Others</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Enter your Email: <span id="colorspan">*</span></label></td>
+                    <td><input type="email" class="form-control m-lg-4" id="email"></td>
+                    <td><span id="emailres"></span></td>
+                </tr>
+                <tr>
+                    <td><label>Enter Mobile number: <span id="colorspan">*</span></label></td>
+                    <td><input type="text" class="form-control m-lg-4" id="phone"></td>
+                    <td><span id="phoneres"></span></td>
+                </tr>
+                <tr>
+                    <td><label>Enter your Address: <span id="colorspan">*</span></label></td>
+                    <td><input type="text" class="form-control m-lg-4" id="address"></td>
+                </tr>
+                <tr>
+                    <td><label>Enter your PINCODE: <span id="colorspan">*</span></label></td>
+                    <td><input type="text" class="form-control m-lg-4 w-75" id="pincode"></td>
+                    <td><input type="text" class="form-control" placeholder="City *" id="city"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="text" class="form-control m-lg-4 w-75" placeholder="State *" id="state"></td>
+                    <td><input type="text" class="form-control " placeholder="Country *" id="country"></td>
+                </tr>
+                <tr>
+                    <td><label>Enter your username: <span id="colorspan">*</span></label></td>
+                    <td><input type="text" class="form-control m-lg-4" id="uname"></td>
+                    <td><span id="unameres"></span></td>
+                </tr>
+                <tr>
+                    <td><label>Enter your password: <span id="colorspan">*</span></label></td>
+                    <td><input type="password" class="form-control m-lg-4" id="pass"></td>
+                </tr>
+                <tr>
+                    <td><label>Confirm your password: <span id="colorspan">*</span></label></td>
+                    <td><input type="password" class="form-control m-lg-4" id="rpass"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p id="res"></p></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button id="subbtn" class="btn btn-danger m-lg-3">Submit</button></td>                        
+                </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

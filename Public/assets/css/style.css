@@ -1,0 +1,84 @@
+#loginBody{
+    background-image: url('../Images/loginbg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    font-family: 'Times New Roman', Times, serif;
+}
+#homebody{
+    background-image: url('../Images/homebg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    font-family: 'Times New Roman', Times, serif;    
+}
+#profilebody{
+    /* background-color: #eee; */
+    background-image: url('../Images/homebg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    font-family: 'Times New Roman', Times, serif;
+}
+#foodbg{
+    
+        /* margin: -7px;
+        width: auto; */
+        height: 800px;
+        background-image: url("../Images/aboutbg.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    
+}
+#blacksheet{
+    color: white;
+    width: auto;
+    height: 800px;
+    background-color: rgba(0,0,0,0.5);
+}
+#logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 550px;
+}
+#breakline{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 3px;
+}
+#div1{
+display: flex;
+justify-content: center;
+align-items: center;
+height: 700px;
+}
+#div2
+{
+width: 800px;
+text-align: center;
+color: white;
+/* background-color: rgba(245, 50, 50, 0.8); */
+background-color: rgba(50, 180, 50, 0.8);
+padding: 20px;
+margin: auto;
+}
+#link
+{
+    color: white;
+    text-decoration: none;
+}
+#signuptable
+{
+    width: 100%;
+}
+#colorspan{
+    color: red;
+}
+#ordersbody{
+    width: 75%;
+    background-color: rgba(50, 180, 50, 0.8);
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
