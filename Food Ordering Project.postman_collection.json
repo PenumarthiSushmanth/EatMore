@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "e711d690-ed35-43ae-8419-a9fc48b916e6",
+		"name": "Food Ordering Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "checkLoginDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4050/checkLoginDetails/DarkEvil/123456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"checkLoginDetails",
+						"DarkEvil",
+						"123456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EnrollCustomer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CustomerFName\": \"bv\",\r\n    \"CustomerLName\": \"Kosana\",\r\n    \"CustomerGen\": \"Male\",\r\n    \"CustomerPhone\": 4788563569,\r\n    \"CustomerCountry\": \"India\",\r\n    \"CustomerState\": \"Andhra pradesh\",\r\n    \"CustomerCity\": \"Guntur\",\r\n    \"CustomerAdd\": \"Near gismat mandhi\",\r\n    \"CustomerPin\": \"522001\",\r\n    \"CustomerUserName\": \"Sdjbf\",\r\n    \"CustomerPass\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4050/enrollCustomer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"enrollCustomer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postingOrderDetails",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CustomerID\" : 105,\r\n    \"Items\" : {\r\n        \"Veg burger\": 1,\r\n        \"Chocolate lava cake\": 1\r\n    },\r\n    \"ItemsCount\" : 2,\r\n    \"TotalAmount\" : 100,\r\n    \"OrderStatus\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4050/postingOrderDetails",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"postingOrderDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "currentOrders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4050/currentOrders/105",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"currentOrders",
+						"105"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAddress",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4050/getAddress/520007",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"getAddress",
+						"520007"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editProfile",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CustomerFName\": \"Krishna\",\r\n    \"CustomerLName\": \"Manohar\",\r\n    \"CustomerGen\": \"Male\",\r\n    \"CustomerPhone\": 4891784562,\r\n    \"CustomerCountry\": \"India\",\r\n    \"CustomerState\": \"Himachal pradesh\",\r\n    \"CustomerCity\": \"Deharadun\",\r\n    \"CustomerAdd\": \"2nd floor, Police camp\",\r\n    \"CustomerPin\": \"50785\",\r\n    \"CustomerUserName\": \"Krish005\",\r\n    \"CustomerPass\": \"123456\",\r\n    \"CustomerBio\": \"I am not heartless. I just want to use my heart less.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4050/editProfile/107",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"editProfile",
+						"107"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetchProfileDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4050/fetchProfileDetails/103",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"fetchProfileDetails",
+						"103"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "closeAccount",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4050/closeAccount/104",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"closeAccount",
+						"104"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkDuplicatePhone",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4050/checkDuplicatePhone/4521784562",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"checkDuplicatePhone",
+						"4521784562"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkDuplicateUsername",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4050/checkDuplicateUsername/DarkEvil",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"checkDuplicateUsername",
+						"DarkEvil"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "previousOrders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4050/previousOrders/105",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"previousOrders",
+						"105"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFoodItems",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4050/getFoodItems/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"getFoodItems",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDetailsByUsername",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4050/getDetailsByUsername/fatherofdragons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4050",
+					"path": [
+						"getDetailsByUsername",
+						"fatherofdragons"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
